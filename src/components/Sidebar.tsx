@@ -1,32 +1,35 @@
-import { Link, useLocation } from "react-router-dom"; // Import Link and useLocation from react-router-dom
+import { Link } from "react-router-dom";
 
-function Sidebar({ companyName }: { companyName: string }) {
-	const location = useLocation(); // Get the current location
-
+function Sidebar() {
 	return (
-		<div className="w-64 bg-gray-800 text-white flex flex-col">
-			{/* Product Name */}
-			<div className="flex items-center justify-center h-16 bg-gray-900">
-				<h1 className="text-2xl font-semibold">Qudos</h1>
-			</div>
+		<div className="w-[350px] bg-stone-950 flex flex-col border-r border-stone-500">
+			<h1 className="text-3xl font-semibold text-stone-300 bg-lime-900 pt-10 pl-2 h-24">
+				The Smart Platform
+			</h1>
 
-			{/* Sidebar Navigation */}
-			<div className="mt-10 space-y-4 px-6">
+			<div className="mt-20 space-y-4 px-6">
 				<Link
 					to="/"
-					className={`block text-gray-300 hover:text-white py-2 ${
-						location.pathname === "/" ? "bg-gray-700" : ""
-					}`}
+					className="uppercase block text-xl py-2 text-lime-700 font-semibold"
 				>
 					Home
 				</Link>
-
-				<div className="text-gray-300 hover:text-white py-2">Settings</div>
+				<div className="text-stone-400 font-semibold uppercase text-xl py-2 hover:text-lime-700">
+					Design
+				</div>
+				<div className="text-stone-400 font-semibold uppercase text-xl py-2 hover:text-lime-700">
+					Test
+				</div>
+				<div className="text-stone-400 font-semibold uppercase text-xl py-2 hover:text-lime-700">
+					Settings
+				</div>
 			</div>
 
-			{/* Company Name at the bottom */}
-			<div className="mt-auto text-gray-300 text-center py-4 border-t border-gray-600">
-				<p>{companyName}</p>
+			<div className="mt-auto bg-stone-900 text-stone-400 text-center flex gap-2 py-4 border-t border-stone-500 justify-center">
+				<div className="flex flex-col items-center">
+					<p className="text-2xl font-bold tracking-wider">BiologIC</p>
+					<p className="text-sm">Technologies</p>
+				</div>
 			</div>
 		</div>
 	);

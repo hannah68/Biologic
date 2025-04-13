@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { parseCSV, readFileAsString } from "../utils";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+
+import { parseCSV, readFileAsString } from "../utils";
 
 export interface Data {
 	[key: string]: string | number;
@@ -8,8 +9,6 @@ export interface Data {
 
 function FileUpload() {
 	const navigate = useNavigate();
-	const [uploadedData, setUploadedData] = useState<Data[]>([]);
-
 	const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		if (e.target.files !== null) {
@@ -21,7 +20,6 @@ function FileUpload() {
 			try {
 				const csvString = await readFileAsString({ file });
 				const data = parseCSV(csvString);
-				setUploadedData(data);
 				navigate("/dashboard", { state: { data } });
 			} catch (error) {
 				console.error("Error reading file:", error);
@@ -29,15 +27,13 @@ function FileUpload() {
 		}
 	};
 
-	console.log(111, uploadedData);
-
 	return (
 		<div className="w-full flex justify-center items-center">
 			<label
 				htmlFor="csvUpload"
-				className="border-2 border-dashed border-gray-400 p-8 rounded-md flex justify-center items-center cursor-pointer hover:bg-gray-50 transition"
+				className="border-2 border-dashed border-stone-400 p-8 rounded-md flex justify-center items-center cursor-pointer hover:text-lime-800 transition"
 			>
-				<p className="text-gray-500">
+				<p className="text-stone-500 text-xl">
 					Drag and drop a file here, or{" "}
 					<span className="underline">click to select one</span>.
 				</p>

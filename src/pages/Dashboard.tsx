@@ -1,67 +1,81 @@
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+
 import Sidebar from "../components/Sidebar";
-import { Data } from "../components/FileUpload";
-
-const calculateAverage = (data: Data[], metric: string): number | null => {
-	const validData = data.filter(
-		(item) => item[metric] !== undefined && item[metric] !== null
-	);
-	if (validData.length === 0) return null;
-
-	const sum = validData.reduce(
-		(acc, item) => acc + parseFloat(item[metric] as string),
-		0
-	);
-	return sum / validData.length;
-};
+import Plot from "../components/Plot";
+import { useChartCustom } from "../hooks/useChartCustom";
 
 function Dashboard() {
+	const [selectedMetric, setSelectedmetric] = useState<string>("");
 	const location = useLocation();
 	const data = location.state?.data;
-
-	const avgTemp = calculateAverage(data, "Temperature_C");
-	const avgOxygen = calculateAverage(data, "Oxygen_%");
-	const avgPH = calculateAverage(data, "pH");
+	const {
+		metricsAverage,
+		plotData,
+		xAxisLabels,
+		keyToUse,
+		range,
+		setRange,
+		isTooltipVisible,
+		setTooltipVisible,
+	} = useChartCustom({
+		data,
+		selectedMetric,
+	});
 
 	if (!data) {
 		return <div>No data available</div>;
 	}
 	return (
 		<div className="flex min-h-screen">
-			{/* Sidebar */}
-			<Sidebar companyName="BiologIC Technologies" />
-
-			{/* Main Content Area (Right side) */}
-			<div className="flex-1 bg-gray-100 p-6">
-				<div className="bg-white w-full h-full rounded shadow-md">
-					<h2 className="text-xl font-semibold mb-4 text-pink-300">
-						Dashboard Content
-					</h2>
-					<div className="flex">
-						{/* Left Side - Three Vertical Boxes */}
-						<div className="flex flex-col space-y-4 w-1/3 p-4">
-							<div className="bg-white p-4 rounded shadow-md">
-								<h3 className="text-lg font-semibold">Average Temperature</h3>
-								<p>{avgTemp?.toFixed(2)} °C</p>
-							</div>
-							<div className="bg-white p-4 rounded shadow-md">
-								<h3 className="text-lg font-semibold">Average Oxygen</h3>
-								<p>{avgOxygen?.toFixed(2)} %</p>
-							</div>
-							<div className="bg-white p-4 rounded shadow-md">
-								<h3 className="text-lg font-semibold">Average pH</h3>
-								<p>{avgPH?.toFixed(2)}</p>
-							</div>
+			<Sidebar />
+			<div className="w-full bg-stone-950 p-6">
+				<div className="bg-stone-900 border border-stone-500 h-full rounded-2xl shadow-md px-10 py-5 relative">
+					<h2 className="text-2xl font-bold mb-4 text-lime-700">DASHBOARD</h2>
+					{/* OVERVIEW */}
+					<button
+						onClick={() => {
+							setRange([0, xAxisLabels.length - 1]);
+							setTooltipVisible(false);
+						}}
+						className="absolute top-8 right-15 mt-2 mr-4 px-4 py-2 hover:bg-stone-950 rounded-md cursor-pointer font-semibol bg-lime-800 text-white shadow-lg hover:border hover:border-2 hover:border-lime-700"
+					>
+						Clear Filter
+					</button>
+					<div className="flex justify-center gap-12 pt-5">
+						<div className="flex flex-col space-y-5 pt-4">
+							{metricsAverage.map((metric) => {
+								return (
+									<button
+										className="bg-stone-950 p-4 rounded-xl shadow-xlg cursor-pointer border border-stone-700 hover:border-stone-400"
+										key={metric.name}
+										onClick={() => {
+											setSelectedmetric(metric.label);
+										}}
+									>
+										<h3 className="text-lg font-semibold text-lime-700 pb-2">
+											{metric.name}
+										</h3>
+										<p className="text-white">
+											{metric.value.toFixed(2)} {metric.unit}
+										</p>
+									</button>
+								);
+							})}
 						</div>
 
-						{/* Right Side - Large Box for Plot/Graph */}
-						<div className="w-2/3 p-4">
-							<div className="bg-white h-full rounded shadow-md">
-								<h3 className="text-xl font-semibold mb-4">Data Plot</h3>
-								{/* Placeholder for the graph */}
-								<div className="w-full h-64 bg-gray-200 rounded flex justify-center items-center text-gray-500">
-									Graph will be here
-								</div>
+						{/* PLOT */}
+						<div className="h-[550px] pt-4">
+							<div className="w-full h-full rounded flex  text-gray-500">
+								<Plot
+									plotData={plotData}
+									xAxisLabels={xAxisLabels}
+									keyToUse={keyToUse}
+									range={range}
+									setRange={setRange}
+									setTooltipVisible={setTooltipVisible}
+									isTooltipVisible={isTooltipVisible}
+								/>
 							</div>
 						</div>
 					</div>

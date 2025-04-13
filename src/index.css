@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+.slider .rc-slider-rail {
+	@apply bg-gray-700 h-2;
+}
+
+.slider .rc-slider-track {
+	@apply bg-lime-800 h-2;
+}
+
+.slider .rc-slider-handle {
+	@apply border-white bg-white w-4 h-4 -mt-1 shadow-md;
+}
+
+.rc-slider-tooltip {
+	transform: translate(-50%, -130%);
+}

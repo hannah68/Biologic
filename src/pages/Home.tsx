@@ -1,17 +1,15 @@
 import FileUpload from "../components/FileUpload";
 import Sidebar from "../components/Sidebar";
-//#4d9900
+
 function Home() {
 	return (
 		<div className="flex min-h-screen">
-			{/* Sidebar */}
-			<Sidebar companyName="BiologIC Technologies" />
+			<Sidebar />
 
-			{/* Main Content Area (Right side) */}
-			<div className="flex-1 bg-gray-100 p-6">
-				<div className="bg-white w-full h-full rounded shadow-md flex justify-center items-center">
-					<div className="">
-						<h2 className="text-xl font-semibold mb-4 text-pink-300">
+			<div className="w-full bg-stone-950 p-6">
+				<div className="h-full rounded-xl shadow-md px-10 py-5 flex justify-center items-center">
+					<div>
+						<h2 className="text-4xl font-semibold mb-15 text-lime-700 text-center">
 							Upload Telemetry Data
 						</h2>
 						<FileUpload />
