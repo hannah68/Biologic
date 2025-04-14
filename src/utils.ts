@@ -1,4 +1,5 @@
 import Papa from "papaparse";
+
 import { Data } from "./components/FileUpload";
 
 export const readFileAsString = ({ file }: { file: File }): Promise<string> => {

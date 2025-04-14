@@ -31,7 +31,7 @@ function Dashboard() {
 			<Sidebar />
 			<div className="w-full bg-stone-950 p-6">
 				<div className="bg-stone-900 border border-stone-500 h-full rounded-2xl shadow-md px-10 py-5 relative">
-					<h2 className="text-2xl font-bold mb-4 text-lime-700">DASHBOARD</h2>
+					<h2 className="text-2xl font-bold mb-4 text-stone-300">DASHBOARD</h2>
 					{/* OVERVIEW */}
 					<button
 						onClick={() => {
@@ -53,7 +53,7 @@ function Dashboard() {
 											setSelectedmetric(metric.label);
 										}}
 									>
-										<h3 className="text-lg font-semibold text-lime-700 pb-2">
+										<h3 className="text-lg font-semibold text-lime-600 pb-2">
 											{metric.name}
 										</h3>
 										<p className="text-white">

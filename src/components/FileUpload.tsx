@@ -1,5 +1,5 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { parseCSV, readFileAsString } from "../utils";
 
@@ -14,12 +14,15 @@ function FileUpload() {
 		if (e.target.files !== null) {
 			const file = e.target.files[0];
 			if (!file || file.type !== "text/csv") {
-				alert("Please upload a valid CSV file");
+				toast.error(
+					"Only CSV files are allowed. Please upload a valid CSV file."
+				);
 				return;
 			}
 			try {
 				const csvString = await readFileAsString({ file });
 				const data = parseCSV(csvString);
+				toast.success("File is uploaded successfully!");
 				navigate("/dashboard", { state: { data } });
 			} catch (error) {
 				console.error("Error reading file:", error);
