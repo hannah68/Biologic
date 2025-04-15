@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { IoAnalytics } from "react-icons/io5";
+import { AiFillExperiment } from "react-icons/ai";
+import { MdDashboard } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
 
 function Sidebar() {
 	return (
@@ -10,18 +14,22 @@ function Sidebar() {
 			<div className="mt-20 space-y-4 pl-10">
 				<Link
 					to="/"
-					className="uppercase block text-xl py-2 text-lime-700 font-semibold cursor-pointer"
+					className="flex uppercase items-center gap-2 text-xl py-2 text-lime-700 font-semibold cursor-pointer"
 				>
-					Home
+					<MdDashboard />
+					<span>Dashboard</span>
 				</Link>
-				<div className="text-stone-300 font-semibold uppercase text-xl py-2 hover:text-lime-700 cursor-pointer">
-					Design
+				<div className="flex text-stone-300 font-semibold uppercase items-center gap-2 text-xl py-2 hover:text-lime-700 cursor-pointer">
+					<AiFillExperiment />
+					<span>Design</span>
 				</div>
-				<div className="text-stone-300 font-semibold uppercase text-xl py-2 hover:text-lime-700 cursor-pointer">
-					Test
+				<div className="flex text-stone-300 font-semibold uppercase items-center gap-2  text-xl py-2 hover:text-lime-700 cursor-pointer">
+					<IoAnalytics />
+					<span>Analyze</span>
 				</div>
-				<div className="text-stone-300 font-semibold uppercase text-xl py-2 hover:text-lime-700 cursor-pointer">
-					Settings
+				<div className="flex text-stone-300 font-semibold uppercase items-center gap-2 text-xl py-2 hover:text-lime-700 cursor-pointer">
+					<IoMdSettings />
+					<span>Settings</span>
 				</div>
 			</div>
 

@@ -79,6 +79,7 @@ export const useChartCustom = ({
 
 	return {
 		metricsAverage,
+		keys,
 		plotData,
 		xAxisLabels,
 		keyToUse,

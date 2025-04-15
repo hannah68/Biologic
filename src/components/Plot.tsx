@@ -70,7 +70,7 @@ function Plot({
 								label: keyToUse,
 								data: filteredData,
 								fill: true,
-								borderColor: "#84cc16",
+								borderColor: "#638f31",
 								backgroundColor: "rgba(132, 204, 22, 0.2)",
 								borderWidth: 2,
 								tension: 0.4,
@@ -125,8 +125,8 @@ function Plot({
 					}}
 				/>
 			</div>
-			<div className="mt-3 px-4">
-				<p className="text-md text-white mb-2 text-center">Filter Time Range</p>
+			<div className="mt-8 px-4">
+				<p className="text-md text-white mb-4 text-center">Filter Time Range</p>
 				<div className="relative">
 					<Slider
 						range
